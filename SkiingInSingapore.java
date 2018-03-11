@@ -19,9 +19,11 @@ public class SkiingInSingapore {
 			ongoingLength++;
 		}
 	}
-
+	//size1 = rows in the matrix ; size2 = columns in the matrix 
 	int size1, size2;
+	//double dimentional array to store the map
 	int[][] theGrid;
+	//theScore[][] stores the values already computed for future use
 	DataClass[][] theScore;
 	int maxLength = 0, maxDrop = 0;
 	
@@ -68,6 +70,12 @@ public class SkiingInSingapore {
 		return max;
 	}
 	
+	
+	/*
+ 	* The function skiAway() uses a dfs like logic to calculate the 'score' for each point in the grid. 
+ 	* The 'Score' for each point in the grid is the longest one can ski from that point.
+ 	* Uses memoization to avoid recalculation of the same subproblems. The values are stored in theScore[][].
+ 	*/
 	public DataClass skiAway(int i, int j) {
 		//if the result for (i,j) has already been computed before
 		if(theScore[i][j]!=null) {
@@ -108,12 +116,14 @@ public class SkiingInSingapore {
 	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
+		//input
 		SkiingInSingapore ob = new SkiingInSingapore(s.nextInt(),s.nextInt());
 		for(int i = 0; i < ob.size1; i++) {
 			for(int j = 0; j < ob.size2; j++) {
 				ob.theGrid[i][j] = s.nextInt();
 			}
 		}
+		//run skiAway() for every point in the grid
 		for(int i = 0; i < ob.size1; i++) {
 			for(int j = 0; j < ob.size2; j++) {
 				if(ob.theScore[i][j]==null) {
